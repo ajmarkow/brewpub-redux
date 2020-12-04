@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './tailwind.output.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+//Import Redux Components
+import {createStore} from 'redux';
+import reducer from './reducers/KegListReducer';
+import {Provider} from 'react-redux';
+//Instantiate a store for state
+const store= createStore(reducer);
+//Add Provider so app has access to store.
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
