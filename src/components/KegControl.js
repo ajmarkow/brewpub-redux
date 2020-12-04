@@ -4,6 +4,7 @@ import KegList from "./KegList";
 import KegDetail from "./KegDetail";
 // Add Redux to Controller
 import {connect} from 'react-redux';
+import PropTypes from "prop-types";
 
 class KegControl extends React.Component {
 
@@ -11,7 +12,7 @@ class KegControl extends React.Component {
       super(props);
       this.state = {
         formVisible: false,
-        fullListOfBrews: [],
+        // Where list of brews was removed from state
         currentBrew: null
       };
     }
@@ -50,22 +51,35 @@ class KegControl extends React.Component {
   }
 
     handleUpdatingCurrentBrew = (id) => {
-      const currentBrew= this.state.fullListOfBrews.filter(brew => brew.id === id)[0];
+      const currentBrew= this.props.fullListOfBrews[id];
       this.setState({currentBrew: currentBrew})
     }
 
     addNewBrew = (addedBrew) => {
-      const updatedFullListOfBrews = this.state.fullListOfBrews.concat(addedBrew)
+      const {dispatch} = this.props;
+      const {name,brand,price,abv,fluidOunces} = addedBrew;
+      const action = {
+        type:'ADD_KEG',
+        name: name,
+        brand: brand,
+        price: price,
+        abv:abv,
+        fluidOunces:fluidOunces
+      }
+      dispatch(action);
       this.setState({
-        fullListOfBrews: updatedFullListOfBrews,
-        formVisible: false,
+        formVisible: false
       })
     }
 
     removeBrew = (id) => {
-      const newFullListofBrews = this.state.fullListOfBrews.filter(keg => keg.id !== id);
+      const {dispatch} = this.props;
+      const action = {
+        type:'REMOVE_KEG',
+        id: id
+      }
+      dispatch(action);
       this.setState({
-        fullListOfBrews: newFullListofBrews,
         currentBrew: null
       });
     }
@@ -83,7 +97,7 @@ class KegControl extends React.Component {
         selectedVisibleState = <AddKegForm onSubmit={this.addNewBrew} />
         buttonText="See our Selection of Brews"
       } else {
-        selectedVisibleState = <KegList kegList={this.state.fullListOfBrews} onBrewSelection={this.handleUpdatingCurrentBrew}/>;
+        selectedVisibleState = <KegList kegList={this.props.fullListOfBrews} onBrewSelection={this.handleUpdatingCurrentBrew}/>;
         buttonText="Add a New Brew"
 
     }
@@ -101,4 +115,11 @@ class KegControl extends React.Component {
 
 KegControl = connect()(KegControl)
 
+KegControl.propTypes = {
+  fullListOfBrews:PropTypes.object
+}
+const mapStateToProps = (state) => {
+  return {
+    fullListofBrews: state}
+}
 export default KegControl;
