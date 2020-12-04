@@ -8,13 +8,19 @@ describe('KegListReducer', () =>{
 
 describe('KegListReducer', () =>{
   let action;
-  const kegData = {
-    name:'DOUBLE IPA',
+  const kegState = {
+   1:{ name:'DOUBLE IPA',
     brand:'DESCHUTES',
     price: 6,
     abv: 8,
     fluidOunces:124,
-    id: 1
+    id: 1},
+    2:{ name:'IPA',
+    brand:'NINKASI',
+    price: 7,
+    abv: 5,
+    fluidOunces:124,
+    id: 2}
   }
   test('The reducer for list of kegs sholud return default if we tell it to do nothing.', () => {
       const {name,brand,price,abv,fluidOunces,id}= kegData;
@@ -37,6 +43,25 @@ describe('KegListReducer', () =>{
           id:1
         }
       })
+
     })
+
+      test('Will remove a keg from list', () => {
+        action = {
+          type: 'REMOVE_KEG',
+          id: 1
+      }
+            expect(KegListReducer(currentState,action)).toEqual({
+          2: {name:'IPA',
+            brand:'NINKASI',
+            price: 7,
+            abv: 5,
+            fluidOunces:124,
+            id: 2 }
+          });
+  });
+
 });
+
+
       
