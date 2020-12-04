@@ -8,7 +8,16 @@ describe('KegListReducer', () =>{
 
 describe('KegListReducer', () =>{
   let action;
-  const kegState = {
+  const kegData = {
+    type: 'ADD_KEG',
+    name:'DOUBLE IPA',
+    brand:'DESCHUTES',
+    price:6,
+    abv:9,
+    fluidOunces:124,
+    id: 1
+  };
+  const currentState = {
    1:{ name:'DOUBLE IPA',
     brand:'DESCHUTES',
     price: 6,
