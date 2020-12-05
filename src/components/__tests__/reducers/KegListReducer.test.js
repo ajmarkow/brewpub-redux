@@ -1,7 +1,7 @@
 import KegListReducer from '../../../reducers/KegListReducer';
 
 describe('KegListReducer', () =>{
-  test('The reducer for list of kegs sholud return default if we tell it to do nothing.', () => {
+  test('The reducer for list of kegs sholud return default state if we tell it to do nothing.', () => {
     expect(KegListReducer({}, {type:null})).toEqual({});
     })
 });
@@ -31,7 +31,7 @@ describe('KegListReducer', () =>{
     fluidOunces:124,
     id: 2}
   }
-  test('The reducer for list of kegs sholud return default if we tell it to do nothing.', () => {
+  test('The reducer for list of kegs should add a keg if we pass in that action type.', () => {
       const {name,brand,price,abv,fluidOunces,id}= kegData;
       action = {
         type: 'ADD_KEG',

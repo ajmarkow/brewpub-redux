@@ -7,8 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import {createStore} from 'redux';
 import reducer from './reducers/KegListReducer';
 import {Provider} from 'react-redux';
+const store = createStore(reducer);
 //Instantiate a store for state
-const store= createStore(reducer);
 //Add Provider so app has access to store.
 ReactDOM.render(
   <React.StrictMode>

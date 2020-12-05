@@ -57,14 +57,15 @@ class KegControl extends React.Component {
 
     addNewBrew = (addedBrew) => {
       const {dispatch} = this.props;
-      const {name,brand,price,abv,fluidOunces} = addedBrew;
+      const {name,brand,price,abv, id,fluidOunces} = addedBrew;
       const action = {
         type:'ADD_KEG',
         name: name,
         brand: brand,
         price: price,
         abv:abv,
-        fluidOunces:fluidOunces
+        fluidOunces:fluidOunces,
+        id:id
       }
       dispatch(action);
       this.setState({
@@ -88,12 +89,12 @@ class KegControl extends React.Component {
       let selectedVisibleState = null;
       let buttonText = null;
 
-      if (this.state.currentBrew != null) {
+      if (this.props.currentBrew != null) {
         selectedVisibleState = <KegDetail keg={this.state.currentBrew} onClickingDelete={this.removeBrew} onClickingDecrement={this.handleClickingDecrement} onClickingIncrement={this.handleClickingIncrement}/>
         buttonText= "Back to Full Brew Selection"
       }
 
-      else if (this.state.formVisible) {
+      else if (this.props.formVisible) {
         selectedVisibleState = <AddKegForm onSubmit={this.addNewBrew} />
         buttonText="See our Selection of Brews"
       } else {
@@ -113,13 +114,16 @@ class KegControl extends React.Component {
 
   }
 
-KegControl = connect()(KegControl)
 
 KegControl.propTypes = {
   fullListOfBrews:PropTypes.object
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    fullListofBrews: state}
+    fullListofBrews: state
+  }
 }
+
+KegControl = connect(mapStateToProps)(KegControl);
+
 export default KegControl;
