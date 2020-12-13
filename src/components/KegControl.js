@@ -72,7 +72,7 @@ class KegControl extends React.Component {
       dispatch(action2);
       // this.setState({
       //   formVisible: false
-      
+      console.log(this.props)
     }
 
     removeBrew = (id) => {
@@ -100,7 +100,7 @@ class KegControl extends React.Component {
         selectedVisibleState = <AddKegForm onSubmit={this.addNewBrew} />
         buttonText="See our Selection of Brews"
       } else {
-        selectedVisibleState = <kegList keglist={this.props.fullListOfBrews} onBrewSelection={this.handleUpdatingCurrentBrew}/>
+        selectedVisibleState = <KegList keglist={this.props.fullListOfBrews} onBrewSelection={this.handleUpdatingCurrentBrew}/>
         buttonText="Add a New Brew"
 
     }
