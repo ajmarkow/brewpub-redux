@@ -11,7 +11,7 @@ class KegControl extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        formVisible: false,
+        // where form visible was removed from component state.
         // Where list of brews was removed from state
         currentBrew: null
       };
@@ -20,12 +20,12 @@ class KegControl extends React.Component {
     handleKegClick = () => {
   if (this.state.currentBrew != null) {
     this.setState({
-      formVisible: false,
       currentBrew: null
     });  
   } else {
-    this.setState(prevState => ({formVisible:!prevState.formVisible
-    }));
+   const {dispatch} = this.props;
+   const action = { type: 'TOGGLE_FORM'}
+   dispatch(action);
   }
 }
 
@@ -67,10 +67,12 @@ class KegControl extends React.Component {
         fluidOunces:fluidOunces,
         id:id
       }
+      const action2 = {type: 'TOGGLE_FORM'}
       dispatch(action);
-      this.setState({
-        formVisible: false
-      })
+      dispatch(action2);
+      // this.setState({
+      //   formVisible: false
+      
     }
 
     removeBrew = (id) => {
@@ -115,14 +117,17 @@ class KegControl extends React.Component {
 
   }
 
-
-KegControl.propTypes = {
-  fullListOfBrews:PropTypes.object
-}
 const mapStateToProps = state => {
   return {
-    fullListofBrews: state
+    fullListOfBrews: state.fullListOfBrews,
+    formVisible: state.formVisible
   }
+}
+
+
+KegControl.propTypes={
+  fullListOfBrews: PropTypes.object,
+  formVisible:PropTypes.bool
 }
 
 KegControl = connect(mapStateToProps)(KegControl);

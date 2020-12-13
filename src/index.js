@@ -6,12 +6,13 @@ import reportWebVitals from './reportWebVitals';
 //Import Redux Components
 import {createStore} from 'redux';
 import reducer from './reducers/KegListReducer';
+import rootReducer from './reducers/index';
 import {Provider} from 'react-redux';
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 store.subscribe(()=>
   console.log(store.getState()));
-  
+
 //Instantiate a store for state
 //Add Provider so app has access to store.
 ReactDOM.render(
