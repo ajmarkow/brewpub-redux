@@ -37,7 +37,7 @@ aj@ajm.codes or contact me at https://ajm.codes
 
 ## Technologies Used
 
-CSS3,HTML5, Javascript, JSX, React.
+CSS3,HTML5, Javascript, JSX, React, Redux **for state management**.
 
 ### License
 
