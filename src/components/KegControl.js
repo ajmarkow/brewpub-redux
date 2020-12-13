@@ -51,7 +51,7 @@ class KegControl extends React.Component {
   }
 
     handleUpdatingCurrentBrew = (id) => {
-      const currentBrew= this.props.fullListOfBrews[id];
+      const currentBrew = this.props.fullListOfBrews[id];
       this.setState({currentBrew: currentBrew})
     }
 
@@ -98,10 +98,11 @@ class KegControl extends React.Component {
         selectedVisibleState = <AddKegForm onSubmit={this.addNewBrew} />
         buttonText="See our Selection of Brews"
       } else {
-        selectedVisibleState = <KegList kegList={this.props.fullListOfBrews} onBrewSelection={this.handleUpdatingCurrentBrew}/>;
+        selectedVisibleState = <kegList keglist={this.props.fullListOfBrews} onBrewSelection={this.handleUpdatingCurrentBrew}/>
         buttonText="Add a New Brew"
 
     }
+    console.log(selectedVisibleState)
     return(
       <React.Fragment>
         {selectedVisibleState}

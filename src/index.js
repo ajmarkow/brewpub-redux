@@ -8,6 +8,10 @@ import {createStore} from 'redux';
 import reducer from './reducers/KegListReducer';
 import {Provider} from 'react-redux';
 const store = createStore(reducer);
+
+store.subscribe(()=>
+  console.log(store.getState()));
+  
 //Instantiate a store for state
 //Add Provider so app has access to store.
 ReactDOM.render(
